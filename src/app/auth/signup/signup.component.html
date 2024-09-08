@@ -1,0 +1,19 @@
+<h2 class="signup-heading">Sign Up</h2>
+<form (ngSubmit)="onSignup()" class="signup-form">
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Full Name</mat-label>
+    <input matInput type="text" [(ngModel)]="name" name="fullName" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" [(ngModel)]="email" name="email" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" [(ngModel)]="password" name="password" required>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" class="signup-button">Sign Up</button>
+</form>

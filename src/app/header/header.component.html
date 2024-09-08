@@ -1,0 +1,7 @@
+<mat-toolbar color="primary">
+  <span>Blogger App</span>
+  <span class="spacer"></span>
+  <button mat-button *ngIf="!authService.isAuthenticated()" (click)="navigateToLogin()">Log In</button>
+  <button mat-button *ngIf="!authService.isAuthenticated()" (click)="navigateToSignup()">Sign Up</button>
+  <button mat-button *ngIf="authService.isAuthenticated()" (click)="logout()">Logout ({{ authService.getCurrentUser()?.fullName }})</button>
+</mat-toolbar>
