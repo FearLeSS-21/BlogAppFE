@@ -12,7 +12,9 @@ export class SignupComponent {
   email = '';
   password = '';
 
-  constructor() { }
+  private signupUrl = 'http://localhost:8080/users/signup';
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   onSignup() {
     const user = {
@@ -20,5 +22,15 @@ export class SignupComponent {
       email: this.email,
       password: this.password
     };
+
+    this.http.post(this.signupUrl, user).subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.error('Signup error:', err);
+        alert('User already exists or there was an error');
+      }
+    });
   }
 }
