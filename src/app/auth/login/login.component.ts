@@ -1,41 +1,39 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   email = '';
   password = '';
 
-  private loginUrl = 'http://localhost:8080/users/login'; // URL for login
+  private apiUrl = 'http://localhost:8080/users/login'; // Adjust the URL as needed
 
   constructor(private http: HttpClient, private router: Router) {}
 
   onLogin() {
-    const payload = { email: this.email, password: this.password };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body = {
+      email: this.email,
+      password: this.password
+    };
 
-    this.http.post<any>(this.loginUrl, payload).subscribe({
-      next: (response) => {
-        console.log(response); // Log the response to understand its structure
-
-        if (response && response.email) { // Assuming successful response contains the email or other user details
-          // Navigate to home page on successful login
-          this.router.navigate(['/']);
-        } else {
-          // Display error message from backend
-          const errorMessage = response?.message || 'Invalid credentials';
-          alert(errorMessage);
+    this.http.post<any>(this.apiUrl, body, { headers })
+      .subscribe(
+        response => {
+          if (response && response.message === 'Login successful') {
+            this.router.navigate(['/']); // Redirect to home page
+          } else {
+            alert('Invalid credentials');
+          }
+        },
+        error => {
+          alert('Invalid credentials');
         }
-      },
-      error: (err) => {
-        // Handle error case
-        console.error('Login failed:', err);
-        alert('Login failed. Please check your network connection and try again.');
-      }
-    });
+      );
   }
 }

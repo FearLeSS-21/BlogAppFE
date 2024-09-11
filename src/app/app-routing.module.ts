@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'blogs/:id', component: BlogDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: '', redirectTo: '/blogs', pathMatch: 'full' }
+  { path: '', redirectTo: '/blogs', pathMatch: 'full' },  // Default redirection
+  { path: '**', redirectTo: '/blogs' }  // Wildcard route for invalid URLs
 ];
 
 @NgModule({

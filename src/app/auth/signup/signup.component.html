@@ -1,19 +1,26 @@
-<h2 class="signup-heading">Sign Up</h2>
-<form (ngSubmit)="onSignup()" class="signup-form">
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Full Name</mat-label>
-    <input matInput type="text" [(ngModel)]="name" name="fullName" required>
-  </mat-form-field>
+<div class="signup-container">
+  <h2>Signup</h2>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Email</mat-label>
-    <input matInput type="email" [(ngModel)]="email" name="email" required>
-  </mat-form-field>
+  <form (ngSubmit)="onSignup()" class="signup-form">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" [(ngModel)]="name" name="name" required>
+    </div>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Password</mat-label>
-    <input matInput type="password" [(ngModel)]="password" name="password" required>
-  </mat-form-field>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" [(ngModel)]="email" name="email" required>
+    </div>
 
-  <button mat-raised-button color="primary" type="submit" class="signup-button">Sign Up</button>
-</form>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" required>
+    </div>
+
+    <button type="submit" class="submit-btn">Sign Up</button>
+  </form>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+</div>
