@@ -1,20 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { BlogListComponent } from './blog/blog-list/blog-list.component';
-import { BlogFormComponent } from './blog/blog-form/blog-form.component';
-import { BlogDetailsComponent } from './blog/blog-details/blog-details.component';
+
+import { SignupComponent } from './signup/signup.component';
+
 
 const routes: Routes = [
-  { path: 'blogs', component: BlogListComponent },
-  { path: 'blogs/new', component: BlogFormComponent },
-  { path: 'blogs/edit/:id', component: BlogFormComponent },
-  { path: 'blogs/:id', component: BlogDetailsComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: '', redirectTo: '/blogs', pathMatch: 'full' },  // Default redirection
-  { path: '**', redirectTo: '/blogs' }  // Wildcard route for invalid URLs
+  { path: '', redirectTo: '/signup', pathMatch: 'full' },  // Default redirection
+  { path: '**', redirectTo: '/signup' }  // Wildcard route for invalid URLs
 ];
 
 @NgModule({
