@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -8,45 +9,48 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  name = '';
-  email = '';
-  password = '';
-  errorMessage = '';
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
+  successMessage: string = '';
+  showDropdown: boolean = false;
 
-  private signupUrl = 'http://localhost:8080/users/signup';
+  constructor(private authService: AuthService) {}
 
-  constructor(private http: HttpClient, private router: Router) { }
-
-  onSignup() {
-    // Check for empty fields before submitting
-    if (!this.name || !this.email || !this.password) {
-      this.errorMessage = 'All fields are required';
-      return;
+  onSignup(form: NgForm) {
+    if (form.valid) {
+      this.authService.signup({ name: this.name, email: this.email, password: this.password })
+        .subscribe(
+          response => {
+            this.successMessage = 'Signup successful!';
+            this.errorMessage = '';
+            form.reset();
+          },
+          (error: HttpErrorResponse) => {
+            this.errorMessage = 'Signup failed: ' + error.message;
+            this.successMessage = '';
+          }
+        );
+    } else {
+      this.errorMessage = 'Please fill in all fields correctly.';
+      this.successMessage = '';
     }
+  }
 
-    const user = {
-      name: this.name,
-      email: this.email,
-      password: this.password
-    };
+  containsUppercase(str: string): boolean {
+    return /[A-Z]/.test(str);
+  }
 
-    // Post request to signup 
-    this.http.post(this.signupUrl, user).subscribe({
-      next: () => {
-        // On success, navigate to login
-        this.router.navigate(['/login']);
-      },
-      error: (err) => {
-        // Handle errors, show appropriate error message
-        console.error('Signup error:', err);
-        if (err.status === 409) {
-          this.errorMessage = 'Email already in use';
-        } else if (err.status === 400) {
-          this.errorMessage = 'Invalid input: ' + err.error;
-        } else {
-          this.errorMessage = 'An error occurred. Please try again later.';
-        }
-      }
-    });
+  containsLowercase(str: string): boolean {
+    return /[a-z]/.test(str);
+  }
+
+  containsNumber(str: string): boolean {
+    return /\d/.test(str);
+  }
+
+  containsSymbol(str: string): boolean {
+    return /[!@#$%^&*(),.?":{}|<>]/.test(str);
   }
 }
