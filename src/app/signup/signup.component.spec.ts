@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { SignupComponent } from './signup.component';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../app/services/auth.service';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
