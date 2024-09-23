@@ -10,17 +10,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
-import { BlogListComponent } from './blog/blog-list/blog-list.component';
-import { BlogFormComponent } from './blog/blog-form/blog-form.component';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
   declarations: [
-    BlogListComponent,
-    BlogFormComponent,
-    LoginComponent,
+
     SignupComponent,
     
   ],
