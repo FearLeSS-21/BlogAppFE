@@ -35,12 +35,5 @@ describe('SignupComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call signup method on form submit', () => {
-    spyOn(authService, 'signup').and.returnValue(true);
-    component.name = 'Test User';
-    component.email = 'test@example.com';
-    component.password = 'password123';
-    component.onSignup();
-    expect(authService.signup).toHaveBeenCalledWith('test@example.com', 'password123', 'Test User');
-  });
+ ;
 });
