@@ -1,11 +1,10 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component'; // Import AppComponent
-import { AppModule } from './app/app.module'; // Import AppModule
-import { importProvidersFrom } from '@angular/core'; // Import importProvidersFrom
+import { AppComponent } from './app/app.component';
+import { AppModule } from './app/app.module';
+import { importProvidersFrom } from '@angular/core';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(AppModule) // Provide module imports
+    importProvidersFrom(AppModule)
   ]
-})
-.catch(err => console.error(err));
+}).catch(err => console.error(err));
