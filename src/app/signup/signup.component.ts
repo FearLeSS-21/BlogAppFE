@@ -19,23 +19,19 @@ export class SignupComponent {
   constructor(private authService: AuthService) {}
 
   onSignup(form: NgForm) {
-    if (form.valid) {
-      this.authService.signup({ name: this.name, email: this.email, password: this.password })
-        .subscribe(
-          response => {
-            this.successMessage = 'Signup successful!';
-            this.errorMessage = '';
-            form.reset();
-          },
-          (error: HttpErrorResponse) => {
-            this.errorMessage = 'Signup failed: ' + error.message;
-            this.successMessage = '';
-          }
-        );
-    } else {
-      this.errorMessage = 'Please fill in all fields correctly.';
-      this.successMessage = '';
-    }
+    // Directly process signup since the button is disabled if the form is invalid
+    this.authService.signup({ name: this.name, email: this.email, password: this.password })
+      .subscribe(
+        response => {
+          this.successMessage = 'Signup successful!';
+          this.errorMessage = '';
+          form.reset();
+        },
+        (error: HttpErrorResponse) => {
+          this.errorMessage = 'Signup failed: ' + error.message;
+          this.successMessage = '';
+        }
+      );
   }
 
   containsUppercase(str: string): boolean {
